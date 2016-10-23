@@ -1,0 +1,27 @@
+<html>
+<head><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script></head>
+<body>
+    <script>$.ajax({
+        url: 'http://127.0.0.1:5000/api/v1.0/player',
+        dataType: 'jsonp',
+        success: function(data) {
+            if (data['players'].length > 0) {
+                $('body').append($('<ul/>', {
+                    id: 'players'
+                }));
+                $.each(data['players'], function( index, value ) {
+                  $("#players").append('<li>' + value['name'] + ' (id: ' + value['id'] + ')</li>');
+                });
+
+            } else {
+                $('body').append($('<div/>', {
+                    id: 'player_msg'
+                }));
+                $( "#player_msg" ).text( "No player exists." );
+            }
+
+            console.log(data);
+        }
+    });</script>
+</body>
+</html>
